@@ -1,0 +1,45 @@
+1. SGBD Relacional vs NoSQL
+
+O uso de um SGBD relacional (como PostgreSQL) é mais adequado para o sistema acadêmico do que um modelo NoSQL, pois garante maior organização, confiabilidade e integridade dos dados.
+
+Esse tipo de banco assegura a integridade referencial entre tabelas como aluno, professor, disciplina e matrícula, evitando inconsistências e garantindo a correta relação entre os dados.
+
+Além disso, os SGBDs relacionais seguem as propriedades ACID:
+
+Atomicidade: garante que uma transação seja executada por completo ou não seja executada.
+Consistência: assegura que todas as regras e restrições do banco sejam mantidas após a transação.
+Isolamento: evita interferência entre transações simultâneas, garantindo segurança em operações concorrentes.
+Durabilidade: garante que os dados permaneçam persistidos mesmo após falhas do sistema.
+
+Já o modelo NoSQL, apesar de oferecer maior flexibilidade e escalabilidade, não é o mais adequado para este cenário, pois pode comprometer a consistência e a integridade entre dados fortemente relacionados.
+
+Dessa forma, o PostgreSQL se destaca como a melhor escolha, por oferecer segurança transacional e confiabilidade para sistemas acadêmicos.
+
+2. Uso de Schemas na Engenharia de Dados
+
+O uso de schemas em ambientes de Engenharia de Dados é uma prática recomendada por melhorar a organização, segurança e manutenção do banco de dados.
+
+Em vez de utilizar apenas o schema padrão public, as tabelas são separadas por contexto de negócio, como academico, seguranca e outros, facilitando a estruturação do sistema.
+
+Essa abordagem traz diversas vantagens, como:
+
+Melhor organização lógica dos dados por domínio
+Maior segurança por meio de controle de permissões por schema
+Facilidade de manutenção e escalabilidade do sistema
+Redução de conflitos de nomes entre tabelas de diferentes contextos
+
+Assim, o uso de schemas torna o banco de dados mais estruturado, escalável e adequado a ambientes profissionais de Engenharia de Dados.
+
+3. Concorrência, Isolamento (ACID) e Locks
+
+Quando dois operadores tentam alterar simultaneamente a mesma ID_Matricula, o SGBD precisa garantir que não haja conflito entre as atualizações e que o resultado final seja consistente.
+
+Esse controle é feito principalmente pela propriedade Isolamento, presente no modelo ACID. O isolamento garante que cada transação seja executada de forma independente, como se fosse a única ocorrendo no sistema, mesmo quando há múltiplas operações simultâneas.
+
+Na prática, o SGBD utiliza locks (bloqueios) para controlar o acesso ao registro sendo atualizado. Quando o primeiro operador inicia a alteração da nota, o banco aplica um bloqueio na linha correspondente da matrícula. Enquanto esse lock estiver ativo, o segundo operador não consegue modificar o mesmo registro e precisa aguardar a liberação.
+
+Esse mecanismo evita problemas como condição de corrida (race condition), perda de atualização e inconsistências nos dados.
+
+Ao final da transação, quando ocorre o commit, o lock é liberado e o banco garante que apenas uma versão válida da alteração seja persistida.
+
+Dessa forma, a combinação de Isolamento (ACID) e Locks assegura que o sistema mantenha a consistência, integridade e confiabilidade dos dados, mesmo em operações simultâneas.
